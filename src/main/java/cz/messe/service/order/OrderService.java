@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cz.messe.model.customer.Customer;
 import cz.messe.model.order.Order;
 import cz.messe.model.order.OrderState;
 import cz.messe.repository.CustomerRepository;
@@ -62,6 +63,10 @@ public class OrderService {
 
     public Page<Order> getAllOrders(Pageable pageable) {
         return orderRepository.findAll(pageable);
+    }
+    
+    public Page<Order> getAllOrdersByCustomer(Customer customer, Pageable pageable) {
+        return orderRepository.findByCustomer(customer, pageable);
     }
 
 }
