@@ -1,4 +1,4 @@
-package cz.messe.model;
+package cz.messe.model.customer;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;

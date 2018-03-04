@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import cz.messe.model.Customer;
-import cz.messe.service.CustomerService;
+import cz.messe.model.customer.Customer;
+import cz.messe.service.customer.CustomerService;
 
 @RestController
 @RequestMapping("customers")

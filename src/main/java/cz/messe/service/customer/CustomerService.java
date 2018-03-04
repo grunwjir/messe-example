@@ -1,4 +1,4 @@
-package cz.messe.service;
+package cz.messe.service.customer;
 
 import java.util.Optional;
 
@@ -8,8 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cz.messe.model.customer.Customer;
 import cz.messe.repository.CustomerRepository;
-import cz.messe.model.Customer;
 
 @Transactional
 @Service
