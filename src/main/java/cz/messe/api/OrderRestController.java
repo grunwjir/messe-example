@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import cz.messe.model.customer.Customer;
 import cz.messe.model.order.Order;
-import cz.messe.service.customer.CustomerService;
 import cz.messe.service.order.OrderService;
 
 @RestController
@@ -32,9 +30,6 @@ public class OrderRestController {
      
     @Autowired
     private OrderService orderService;
-    
-    @Autowired
-    private CustomerService customerService;
     
     @GetMapping("/{id}")
     public Order getOrder(@PathVariable("id") Long id) {
@@ -87,18 +82,5 @@ public class OrderRestController {
             @RequestParam(value = "size") Integer size) {
         return orderService.getAllOrders(PageRequest.of(page, size));
     }
-    
-    @GetMapping("/{id}/orders")
-    public Page<Order> getAllOrdersByCustomer(@PathVariable("id") Long id,
-            @RequestParam(value = "page") Integer page, 
-            @RequestParam(value = "size") Integer size) {
-        Optional<Customer> customer = customerService.getCustomer(id);
-        
-        if (!customer.isPresent()) {
-            throw new ResourceNotFoundException();
-        }
-        
-        return orderService.getAllOrdersByCustomer(customer.get(), PageRequest.of(page, size));
-    }
-    
+
 }
