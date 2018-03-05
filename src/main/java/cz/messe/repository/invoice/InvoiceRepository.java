@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import cz.messe.model.invoice.Invoice;
 
 @Repository
-public interface InvoiceRepository extends JpaRepository<Invoice, Long>{ 
+public interface InvoiceRepository extends JpaRepository<Invoice, Long>, InvoiceRepositoryCustom { 
     
 }
