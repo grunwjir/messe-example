@@ -1,4 +1,4 @@
 # messe-example
 Example project using Spring Boot
 
-Details in github wiki.
+Details on https://github.com/grunwjir/messe-example/wiki
