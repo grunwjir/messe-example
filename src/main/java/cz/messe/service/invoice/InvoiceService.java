@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cz.messe.model.customer.Customer;
 import cz.messe.model.invoice.Invoice;
 import cz.messe.repository.invoice.InvoiceRepository;
 
@@ -18,6 +19,9 @@ public class InvoiceService {
     @Autowired
     private InvoiceRepository invoiceRepository;
     
+    @Autowired
+    private InvoiceSolver invoiceSolver;
+    
     public Optional<Invoice> getInvoice(Long id) {
         return invoiceRepository.findById(id);
     }
@@ -25,5 +29,15 @@ public class InvoiceService {
     public Page<Invoice> getAllInvoices(Pageable pageable) {
         return invoiceRepository.findAll(pageable);
     }
+    
+    public Long createInvoice(Customer customer) {
+        Invoice invoice = invoiceSolver.createInvoice(customer);
+        
+        return invoice.getId();
+    }
+    
+    public void updateInvoice(Invoice invoice) {
+        invoiceSolver.updateInvoice(invoice);
+    } 
     
 }
