@@ -50,7 +50,7 @@ public class Invoice {
     
     @JsonIgnore
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InvoicedRoute> routes = new ArrayList<>(); 
+    private List<InvoicedOrder> routes = new ArrayList<>(); 
     
     @NotNull
     @Column(name ="tax_amount")
@@ -111,12 +111,12 @@ public class Invoice {
         userItems.remove(item);
     }
     
-    public void addRoute(InvoicedRoute route) {
+    public void addRoute(InvoicedOrder route) {
         routes.add(route);
         route.setInvoice(this);
     }
     
-    public void removeRoute(InvoicedRoute route) {
+    public void removeRoute(InvoicedOrder route) {
         routes.remove(route);
         route.setInvoice(null);
     }
@@ -177,11 +177,11 @@ public class Invoice {
         this.customer = customer;
     }
 
-    public List<InvoicedRoute> getRoutes() {
+    public List<InvoicedOrder> getRoutes() {
         return routes;
     }
 
-    public void setRoutes(List<InvoicedRoute> routes) {
+    public void setRoutes(List<InvoicedOrder> routes) {
         this.routes = routes;
     }
 

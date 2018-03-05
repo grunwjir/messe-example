@@ -19,7 +19,7 @@ import cz.messe.model.order.Order;
 
 @Entity
 @Table(name = "invoiced_routes")
-public class InvoicedRoute {
+public class InvoicedOrder {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -52,11 +52,16 @@ public class InvoicedRoute {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    public InvoicedRoute() {
+    public InvoicedOrder() {
         
     }
+
+    public InvoicedOrder(Order order) {
+        this.order = order;
+    }
     
-    public InvoicedRoute(BigDecimal price, BigDecimal priceDiscounted,
+    
+    public InvoicedOrder(BigDecimal price, BigDecimal priceDiscounted,
             BigDecimal insurance, String townFrom, String townTo, Order order) {
         this.price = price;
         this.priceDiscounted = priceDiscounted;
