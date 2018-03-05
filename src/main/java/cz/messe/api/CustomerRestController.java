@@ -24,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import cz.messe.model.customer.Customer;
 import cz.messe.model.order.Order;
 import cz.messe.service.customer.CustomerService;
+import cz.messe.service.invoice.InvoiceService;
 import cz.messe.service.order.OrderService;
 
 @RestController
@@ -35,6 +36,9 @@ public class CustomerRestController {
     
     @Autowired
     private OrderService orderService;
+    
+    @Autowired
+    private InvoiceService invoiceService;
     
     @GetMapping("/{id}")
     public Customer getCustomer(@PathVariable("id") Long id) {
@@ -99,6 +103,22 @@ public class CustomerRestController {
         }
         
         return orderService.getAllOrdersByCustomer(customer.get(), PageRequest.of(page, size));
+    }
+    
+    @PostMapping("/{id}/invoices")
+    public ResponseEntity<Void> createInvoice(@PathVariable("id") Long id) {
+        Optional<Customer> customer = customerService.getCustomer(id);
+        
+        if (!customer.isPresent()) {
+            throw new ResourceNotFoundException();
+        }
+        
+        Long invoiceId = invoiceService.createInvoice(customer.get());
+        
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(invoiceId).toUri();
+        
+        return ResponseEntity.created(location).build();
     }
     
 }
